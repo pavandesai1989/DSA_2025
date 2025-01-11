@@ -1,0 +1,127 @@
+class Solution {
+public:
+    bool isPalindrome(string s,int l,int r)
+    {
+        while(l<r)
+        {
+            if(s[l] != s[r])
+              return false;
+
+            l++;
+            r--;  
+        }
+        return true;
+    }
+
+    bool validPalindrome(string s) 
+    {
+        int l=0;
+        int r=s.size()-1;
+
+        while(l<r)
+        {
+            if(s[l] == s[r])
+            {
+                l++;
+                r--;
+            }
+            else
+            {
+                return isPalindrome(s,l+1,r) || isPalindrome(s,l,r-1);
+            }
+        }
+        return true;
+    }
+};
+
+
+Time Complexity Analysis
+The given code consists of two parts:
+
+The Main Function validPalindrome
+
+The primary while loop iterates as long as 
+𝑙
+<
+𝑟
+l<r.
+
+If 
+𝑠
+[
+𝑙
+]
+=
+=
+𝑠
+[
+𝑟
+]
+s[l]==s[r], the pointers 
+𝑙
+l and 
+𝑟
+r move inward. This continues until a mismatch is found, which may involve iterating over the entire string, i.e., 
+𝑂
+(
+𝑛
+)
+O(n) where 
+𝑛
+n is the length of the string.
+
+On finding a mismatch, the function calls isPalindrome twice:
+
+First call: isPalindrome(s, l + 1, r)
+Second call: isPalindrome(s, l, r - 1)
+The Helper Function isPalindrome
+
+This function verifies if the substring between indices 
+𝑙
+l and 
+𝑟
+r is a palindrome.
+In the worst case, the function processes the remaining substring of size 
+𝑛
+/
+2
+n/2.
+Worst-Case Scenario
+The worst case occurs when there is exactly one mismatch, requiring two calls to isPalindrome. Each call may process up to half the string.
+Thus, in the worst case, the time complexity is:
+𝑂
+(
+𝑛
+)
++
+2
+×
+𝑂
+(
+𝑛
+/
+2
+)
+=
+𝑂
+(
+𝑛
+)
++
+𝑂
+(
+𝑛
+)
+=
+𝑂
+(
+𝑛
+)
+O(n)+2×O(n/2)=O(n)+O(n)=O(n)
+Space Complexity
+The algorithm uses a constant amount of extra space, 
+𝑂
+(
+1
+)
+O(1), since no additional data structures are used, and the function operates in-place.
