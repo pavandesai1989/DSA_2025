@@ -1,0 +1,72 @@
+*** to check alphanumeric using -- isalnum () and convert all characters to lower case tolower()
+
+
+
+class Solution {
+public:
+    bool isPalindrome(string s) 
+    {
+        int l=0;
+        int h=s.size()-1;
+
+        while(l<h)
+        {
+            while(l<h && !isalnum(s[l])){    //imp
+                l++;
+            }
+            while(h>l && !isalnum(s[h])){
+                h--;
+            }
+            if(tolower(s[l]) != tolower(s[h]))
+              return false;
+
+            l++;
+            h--;  
+        }
+        return true;
+        
+    }
+};
+
+
+Outer while Loop (while(l < h)):
+
+The loop continues as long as l < h, with l and h moving toward each other. In the worst case, this loop iterates over all characters in the string once, i.e., 
+𝑂
+(
+𝑛
+)
+O(n), where 
+𝑛
+n is the length of the string s.
+Inner while Loops (while(l < h && !isalnum(s[l]) and while(h > l && !isalnum(s[h])):
+
+These loops skip over non-alphanumeric characters. In the worst-case scenario, the entire string could be non-alphanumeric, and both pointers would traverse the entire string. However, this traversal is still 
+𝑂
+(
+𝑛
+)
+O(n) overall because each pointer moves in one direction and processes each character at most once.
+Comparison (tolower(s[l]) != tolower(s[h])):
+
+This is a constant-time operation, 
+𝑂
+(
+1
+)
+O(1), performed at each iteration of the outer loop.
+Total Time Complexity:
+The overall time complexity is determined by the outer loop, which processes each character at most once, resulting in 
+𝑂
+(
+𝑛
+)
+O(n).
+
+Space Complexity:
+The algorithm uses a constant amount of extra space, 
+𝑂
+(
+1
+)
+O(1), as it performs all operations in-place and does not use any auxiliary data structures.
