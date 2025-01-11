@@ -1,0 +1,64 @@
+maintain 2 pointers pointing to 1st and last char of string
+while l<h swap the char and l++ and h--
+
+
+class Solution {
+public:
+    void reverseString(vector<char>& s) 
+    {
+        int l = 0;
+        int h = s.size()-1;
+
+        while(l<h)
+        {
+            swap(s[l],s[h]);
+            l++;
+            h--;
+        }
+    }
+};
+
+
+time complexity :
+Steps in the Code
+Initialization:
+
+l is initialized to 0.
+h is initialized to s.size() - 1.
+Loop:
+
+The while loop runs while l < h.
+Each iteration involves:
+A swap operation, which is constant time 
+𝑂(1)
+
+Incrementing l and decrementing h.
+Number of Iterations:
+The loop runs for approximately half the size of the vector because two elements are processed in each iteration (one from the beginning and one from the end).
+If the size of the vector is 
+𝑛
+n, the loop runs 
+⌈𝑛/2⌉
+⌈n/2⌉ times.
+Time Complexity
+Swap operation: 
+𝑂(1)
+O(1)
+Number of iterations: 
+𝑂(𝑛/2)
+O(n/2), which simplifies to 
+𝑂(𝑛)
+O(n).
+Therefore, the overall time complexity is:
+𝑂
+(
+𝑛
+)
+O(n)
+Space Complexity
+The function uses a constant amount of extra space for the two pointers (l and h), so the space complexity is:
+𝑂
+(
+1
+)
+O(1)
