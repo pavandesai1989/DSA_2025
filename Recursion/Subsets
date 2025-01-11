@@ -1,0 +1,81 @@
+class Solution {
+public:
+    void helper(vector<int> nums,vector<int> temp,int idx,vector<vector<int>>& res)
+    {
+        //base case 
+        if(idx>=nums.size())
+        {
+            res.push_back(temp);
+            return;
+        }
+
+        //take case
+        temp.push_back(nums[idx]);
+
+        //call for next index
+        helper(nums,temp,idx+1,res);
+
+        //back tracking
+        temp.pop_back();
+
+        helper(nums,temp,idx+1,res);
+    }
+    vector<vector<int>> subsets(vector<int>& nums)
+    {
+        vector<vector<int>> res;
+        vector<int> temp;
+        helper(nums,temp,0,res);
+
+        return res;
+        
+    }
+};
+
+For each element in the array, there are two choices: include it in the subset or exclude it.
+Thus, the overall time complexity is dominated by the 
+𝑂
+(
+2
+𝑛
+)
+O(2 
+n
+ ) calls to the recursive function.
+The resulting res vector stores all subsets.
+Since there are 
+2
+𝑛
+2 
+n
+  subsets, and the average size of a subset is 
+𝑛
+/
+2
+n/2, the total space required for the output is 
+𝑂
+(
+𝑛
+⋅
+2
+𝑛
+)
+O(n⋅2 
+n
+ ).
+However, this output storage is usually not considered part of the algorithm's auxiliary space complexity.
+Thus, the auxiliary space complexity is 
+𝑂
+(
+𝑛
+)
+O(n), but the total space complexity (including the result) is 
+𝑂
+(
+𝑛
+⋅
+2
+𝑛
+)
+O(n⋅2 
+n
+ ).
