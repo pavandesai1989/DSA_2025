@@ -1,0 +1,145 @@
+#include <vector>
+#include <algorithm>
+
+class Solution {
+public:
+    std::vector<std::vector<int>> threeSum(std::vector<int>& nums) {
+        std::vector<std::vector<int>> res;
+        int n = nums.size();
+
+        // Sort the array
+        std::sort(nums.begin(), nums.end());
+
+        for (int i = 0; i < n - 2; ++i) {
+            // Skip duplicates for the first element
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
+
+            int target = -nums[i];
+            int l = i + 1, h = n - 1;
+
+            while (l < h) {
+                int sum = nums[l] + nums[h];
+
+                if (sum < target) {
+                    ++l;
+                } else if (sum > target) {
+                    --h;
+                } else {
+                    res.push_back({nums[i], nums[l], nums[h]});
+
+                    // Skip duplicates for the second and third elements
+                    while (l < h && nums[l] == nums[l + 1]) ++l;
+                    while (l < h && nums[h] == nums[h - 1]) --h;
+
+                    ++l;
+                    --h;
+                }
+            }
+        }
+
+        return res;
+    }
+};
+
+
+Combined Complexity
+The overall time complexity is the product of the outer loop and the inner two-pointer search:
+
+𝑂
+(
+𝑛
+log
+⁡
+𝑛
+)
+ (sorting) 
++
+𝑂
+(
+𝑛
+)
+×
+𝑂
+(
+𝑛
+)
+ (nested loops for two-pointer search) 
+=
+𝑂
+(
+𝑛
+2
+)
+O(nlogn) (sorting) +O(n)×O(n) (nested loops for two-pointer search) =O(n 
+2
+ )
+
+ **********BRUTE FORCE 
+ #include <vector>
+#include <set>
+
+class Solution {
+public:
+    std::vector<std::vector<int>> threeSum(std::vector<int>& nums) {
+        std::set<std::vector<int>> uniqueTriplets; // To store unique triplets
+        int n = nums.size();
+
+        // Iterate through all possible triplets
+        for (int i = 0; i < n - 2; ++i) {
+            for (int j = i + 1; j < n - 1; ++j) {
+                for (int k = j + 1; k < n; ++k) {
+                    if (nums[i] + nums[j] + nums[k] == 0) {
+                        // Sort the triplet to ensure uniqueness
+                        std::vector<int> triplet = {nums[i], nums[j], nums[k]};
+                        std::sort(triplet.begin(), triplet.end());
+                        uniqueTriplets.insert(triplet);
+                    }
+                }
+            }
+        }
+
+        // Convert the set of unique triplets to a vector
+        return std::vector<std::vector<int>>(uniqueTriplets.begin(), uniqueTriplets.end());
+    }
+};
+
+
+Complexity:
+Time Complexity:
+Three nested loops result in 
+𝑂
+(
+𝑛
+3
+)
+O(n 
+3
+ ) complexity for generating all possible triplets.
+Sorting and inserting into the set for each triplet is 
+𝑂
+(
+log
+⁡
+𝑚
+)
+O(logm), where 
+𝑚
+m is the number of unique triplets.
+Overall: 
+𝑂
+(
+𝑛
+3
+)
+O(n 
+3
+ ).
+Space Complexity:
+The std::set stores unique triplets, leading to 
+𝑂
+(
+𝑚
+)
+O(m), where 
+𝑚
+m is the number of unique triplets.
