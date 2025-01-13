@@ -1,0 +1,36 @@
+class Solution {
+public:
+    void helper(string str,int o,int c,int n,vector<string>& res)
+    {
+       //base case
+       if(o==n && c==n)
+       {
+          res.push_back(str);
+          return;
+       }
+
+       //adding open 
+       if(o<n)
+       {
+          str.push_back('(');
+          helper(str,o+1,c,n,res);
+          str.pop_back();
+       }
+
+       //adding close
+       if(c<o)
+       {
+          str.push_back(')');
+          helper(str,o,c+1,n,res);
+          str.pop_back();
+       }
+    }
+
+    vector<string> generateParenthesis(int n) 
+    {
+        vector<string> res;
+        string str="";
+        helper(str,0,0,n,res);
+        return res;
+    }
+};
