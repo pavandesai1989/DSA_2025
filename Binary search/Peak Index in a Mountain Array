@@ -1,0 +1,54 @@
+***brute force***
+To find the index of the peak element in a mountain array using a brute force approach, we can simply iterate through the array and check for the peak element. 
+The peak element is defined as an element that is greater than its neighbors (i.e., arr[i] > arr[i - 1] and arr[i] > arr[i + 1]).
+
+
+class Solution {
+public:
+    int peakIndexInMountainArray(vector<int>& arr) 
+    {
+        int n = arr.size();
+        //check for 1st element 
+        if(arr[0]>arr[1])
+           return 0;
+
+
+        //check for last element
+        if(arr[n-1]>arr[n-2])
+           return n-1;
+
+
+        for(int i=1;i<n-1;i++)
+        {
+            if(arr[i]>arr[i-1] && arr[i]>arr[i+1])
+                return i;
+        }   
+        return -1;
+        
+    }
+};
+
+**********Binary search*********
+class Solution {
+public:
+    int peakIndexInMountainArray(vector<int>& arr) 
+    {
+        int l=0;
+        int r=arr.size()-1;
+
+        while(l<r)  ******
+        {
+            int mid = l + (r-l)/2;
+
+            if(arr[mid]<arr[mid+1])
+            {
+                l = mid+1;//answer lies in 2nd half
+            }
+            else
+            {
+                r = mid;
+            }
+        }
+        return l; //you can return r also as both point to same element
+    }
+};
