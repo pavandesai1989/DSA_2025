@@ -1,0 +1,74 @@
+*****brute force*****  o(n*n) space o(n) for the map
+
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) 
+    {
+        if (s.empty())
+           return 0;
+
+        int ans=0;
+        int n=s.length();
+        map<char,int> umap;
+
+        for(int i=0;i<n;i++)
+        {
+            umap.clear();
+            for(int j=i;j<n;j++)
+            {
+                //check if char is in map
+                if(umap.find(s[j])!=umap.end())
+                {
+                    break;
+                }
+                else
+                {
+                    umap.insert({s[j],1});
+
+                    //update answer 
+                    if(j-i+1 > ans)
+                    {
+                        ans = j-i+1;
+                    }
+
+                }
+            }
+        }
+        return ans;        
+    }
+};
+
+
+***********optimal********
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) 
+    {
+        int start = 0;
+        int end = 0;
+        int n = s.length();
+        char mapp[256] = {-1};
+        int ans = INT_MIN;
+
+        while(end<n)
+        {
+           //check if present in mapp
+           while(start<end && mapp[s[end]] == 1)
+           {
+               //remove elements from start
+               mapp[s[start]]--;
+               start++;               
+           }
+
+           //add in mapp
+           mapp[s[end]]++;
+
+           //update answer
+           ans = (ans>end-start+1) ? ans : end-start+1;
+
+           end++;
+        }
+        return ans;
+    }
+};
