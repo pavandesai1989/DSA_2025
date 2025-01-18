@@ -2,6 +2,36 @@ https://www.geeksforgeeks.org/problems/count-occurences-of-anagrams5839/1
 
 **********brute force****
 
+class Solution {
+public:
+    bool isAnagram(string temp,string p)   //o(mlogm)
+    {
+        sort(temp.begin(),temp.end());
+        sort(p.begin(),p.end());
+
+        return temp == p;
+    }
+    vector<int> findAnagrams(string s, string p) 
+    {
+        int n=s.size();
+        int m=p.size();
+        vector<int> res;
+
+        for(int i=0;i<=n-m;i++)   //o(n)
+        {
+            string temp = s.substr(i,m);   //o(m)
+            if(isAnagram(temp,p))
+            {
+                res.push_back(i);
+            }
+        }
+        return res;
+    }
+};
+
+
+Time : O(n⋅(m+mlogm))≈O(n⋅mlogm)
+
 
 
 
