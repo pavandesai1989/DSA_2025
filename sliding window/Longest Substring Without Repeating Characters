@@ -41,6 +41,16 @@ public:
 
 
 ***********optimal********
+Approach:
+keep 2 pointers i and j point to idx 0
+as we need to keep track of non duplicate weneed unordered_map - add and read at o(1)
+add ele in the map to store its freq
+check if its valid substring ( if any char occurance in map is >1 return false as we need substring with no duplicates) if true update res with max(res,j-i+1)
+if its not valid we need to reduce the window. reduce count of s[i] from map, if count is 0 delete from map and i++
+
+
+
+
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) 
