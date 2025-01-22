@@ -1,0 +1,35 @@
+class Solution {
+public:
+    long long maximumSubarraySum(vector<int>& nums, int k) 
+    {
+        int i=0,j=0;
+        long long maxSum = INT_MIN;
+        int n=nums.size();
+        unordered_map<long long,int> umap;
+        long long lSum = 0;
+
+        while(j<n)
+        {
+            umap[nums[j]]++;
+            lSum += nums[j];
+
+            if(j-i+1 ==k) //imp check
+            {
+                if(umap.size()==k) //imp check
+                  maxSum = std::max(maxSum,lSum);
+
+                //shrink window
+                lSum -= nums[i];
+                umap[nums[i]]--;
+
+                if(umap[nums[i]] == 0)
+                {
+                    umap.erase(nums[i]);
+                }
+                i++;
+            }
+            j++;
+        }
+        return maxSum == INT_MIN ? 0 : maxSum;
+    }
+};
