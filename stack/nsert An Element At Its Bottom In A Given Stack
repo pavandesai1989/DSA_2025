@@ -1,0 +1,28 @@
+#include <bits/stdc++.h> 
+
+
+void solve(stack<int>& st,int x)
+{
+    //base case
+    if(st.empty())
+    {
+        st.push(x);
+        return;
+    }
+
+    //store the top element
+    int ele = st.top();
+    st.pop();   //imp
+
+    //recursion
+    solve(st,x);
+
+    //push back the stored ele
+    st.push(ele);
+}
+
+stack<int> pushAtBottom(stack<int>& myStack, int x) 
+{
+    solve(myStack,x);
+    return myStack;
+}
