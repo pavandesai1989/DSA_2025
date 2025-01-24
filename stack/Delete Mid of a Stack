@@ -1,0 +1,68 @@
+https://www.geeksforgeeks.org/problems/delete-middle-element-of-a-stack/1
+
+//{ Driver Code Starts
+// Initial template for C++
+
+#include <bits/stdc++.h>
+using namespace std;
+
+
+// } Driver Code Ends
+// User function template for C++
+
+class Solution {
+  public:
+    // Function to delete middle element of a stack.
+    void solve(stack<int>& st,int cnt,int size)
+    {
+        //base case
+        if(cnt == size/2)
+        {
+            st.pop();
+            return;
+        }
+        
+        //store the top element
+        int ele = st.top();
+        st.pop();
+        
+        //recursion
+        solve(st,cnt+1,size);
+        
+        //push ele back
+        st.push(ele);
+    }
+    void deleteMid(stack<int>& s) 
+    {
+        solve(s,0,s.size());
+    }
+};
+
+//{ Driver Code Starts.
+int main() {
+    int t;
+    cin >> t;
+    cin.ignore();
+    while (t--) {
+        string line;
+        getline(cin, line);
+        stringstream ss(line);
+        stack<int> s;
+        int num;
+        while (ss >> num) {
+            s.push(num);
+        }
+
+        Solution ob;
+        ob.deleteMid(s);
+        while (!s.empty()) {
+            cout << s.top() << " ";
+            s.pop();
+        }
+        cout << endl;
+        cout << "~\n";
+    }
+    return 0;
+}
+
+// } Driver Code Ends
