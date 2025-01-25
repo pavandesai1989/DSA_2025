@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int minSwaps(string s) 
+    {
+        stack<char> st;
+
+        for(auto ele:s)
+        {
+            if(ele=='[')
+            {
+                st.push(ele);
+            }
+            else if(!st.empty()) //that means open bracket exists in stack
+            {
+                st.pop();
+            }
+        }
+        return (st.size()+1)/2;  //imp it follows pattern 
+    }
+};
