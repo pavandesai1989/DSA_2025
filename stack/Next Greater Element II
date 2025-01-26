@@ -1,3 +1,59 @@
+**********optimal***********
+class Solution {
+public:
+    vector<int> nextGreaterElements(vector<int> &arr) 
+    {
+        int n = arr.size();
+        vector<int> res(n,0);
+
+        for(int i=0;i<n;i++)
+        {
+            for(int j=i+1;j<i+n;j++)
+            {
+                if(arr[j%n] > arr[i])
+                {
+                    res[i] = arr[j%n];
+                    break;
+                }
+            }
+            if(res[i] == 0)
+            {
+                res[i] = -1;
+            }
+        }
+        return res;
+    }
+};
+
+j = i + 1 Starts searching for the next greater element.
+
+j < i + n Ensures every element is checked once, even in circular traversal.
+
+j % n Handles circular indexing to wrap around when reaching the array end.
+
+
+
+example:
+
+2 10 12 1 11 2 10 12 1 11
+
+0 1. 2. 3. 4 5. 6. 7. 8. 9
+
+
+
+when i = 4 we need to start search from 5 till 9 index
+
+so j=i+1 and till i+n = 4 + 5 = 9
+
+
+
+arr[j%n] = [7%5] = 2 we got greater element
+
+
+**********optimal*****
+
+
+
 class Solution {
 public:
     vector<int> nextGreaterElements(vector<int>& nums) 
