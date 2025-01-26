@@ -80,3 +80,7 @@ public:
         return res;
     }
 };
+
+
+Time Complexity:The code runs a loop from 2n-1 to 0, which translates to two passes through the array. Inside the loop, each element of the array is pushed and popped from the stack at most once. Hence, the overall time complexity is O(n), where n is the number of elements in the array.
+Space Complexity:The extra space needed is primarily due to the stack, which can hold at most n elements in the worst-case scenario. Therefore, the space complexity is O(n).
