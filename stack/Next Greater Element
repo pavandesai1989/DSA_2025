@@ -1,3 +1,38 @@
+
+**********brute force****
+class Solution {
+public:
+    vector<int> nextLargerElement(vector<int> arr) 
+    {
+        int n = arr.size();
+        vector<int> res(n,0); //we know size 
+
+        for(int i=0;i<n;i++)
+        {
+            for(int j=i+1;j<n;j++)
+            {
+                if(arr[j] > arr[i])
+                {
+                    res[i] = arr[j];
+                    break;  //imp we need first greater element
+                }
+            }
+            //if not found assign -1
+            if(res[i] == 0)
+            {
+                res[i] = -1;
+            }
+        }
+        return res;
+    }
+};
+
+Time Complexity:The time complexity of the code is O(n^2) because of the two nested loops iterating over the array.
+Space Complexity:The space complexity of the code is O(n) due to the additional space used by the result vector.
+
+
+***********optimal************
+
 Next Greater Element
 //{ Driver Code Starts
 #include <bits/stdc++.h>
