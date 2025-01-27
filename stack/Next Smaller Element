@@ -1,0 +1,28 @@
+https://www.naukri.com/code360/problems/next-smaller-element_1112581?leftPanelTabValue=PROBLEM
+
+#include<stack>
+vector<int> nextSmallerElement(vector<int> &arr, int n)
+{
+  vector<int> res(n,0);
+  stack<int> st;
+
+  for(int i=n-1;i>=0;--i)
+  {
+    while(!st.empty() && arr[i]<=st.top()) //<= to handle duplicates
+    {
+      st.pop();
+    }
+
+    if(st.empty())
+    {
+      res[i] = -1;
+    }
+    else
+    {
+      res[i] = st.top();
+    }
+
+    st.push(arr[i]);
+  }
+  return res;
+}
