@@ -1,0 +1,44 @@
+https://algo.monster/liteproblems/487
+
+#include <iostream>
+#include <vector>
+#include <algorithm> // for std::max
+
+using namespace std;
+
+class Solution {
+public:
+    int findMaxConsecutiveOnes(vector<int>& nums) {
+        int left = 0, right = 0;
+        int zeroCount = 1; // You can flip at most one 0
+        int maxConsecutive = 0;
+
+        while (right < nums.size()) {
+            if (nums[right] == 0) {
+                zeroCount--;
+            }
+
+            while (zeroCount < 0) {
+                if (nums[left] == 0) {
+                    zeroCount++;
+                }
+                left++;
+            }
+
+            maxConsecutive = max(maxConsecutive, right - left + 1);
+            right++;
+        }
+
+        return maxConsecutive;
+    }
+};
+
+int main() {
+    Solution sol;
+    vector<int> nums = {1, 0, 1, 1, 0};
+    int result = sol.findMaxConsecutiveOnes(nums);
+    cout << "Max consecutive ones (with one zero flip): " << result << endl;
+    return 0;
+}
+
+
