@@ -1,9 +1,10 @@
+
+
 class Solution {
 public:
-    void helper(int idx,vector<int>& nums,vector<int> ds,int target,vector<vector<int>>& res)
+    void helper(vector<int>& nums,int idx,int target,vector<int> ds,vector<vector<int>>& res)
     {
-        //base case
-        if(idx==nums.size())
+        if(idx == nums.size())
         {
             if(target == 0)
             {
@@ -12,23 +13,24 @@ public:
             return;
         }
 
+        //pick case 
         if(nums[idx]<=target)
         {
             ds.push_back(nums[idx]);
-            //call on same index 
-            helper(idx,nums,ds,target-nums[idx],res);
-
-            //backtracking
+            helper(nums,idx,target-nums[idx],ds,res); // as same num can be picked many times call on same idx and target reduces 
             ds.pop_back();
         }
 
-        helper(idx+1,nums,ds,target,res);
+        //not pick case
+        helper(nums,idx+1,target,ds,res);
     }
+
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) 
     {
         vector<vector<int>> res;
         vector<int> ds;
-        helper(0,candidates,ds,target,res);
-        return res;        
+        helper(candidates,0,target,ds,res);
+
+        return res;
     }
 };
