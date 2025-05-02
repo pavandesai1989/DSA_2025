@@ -1,0 +1,44 @@
+https://leetcode.com/problems/subsets-ii/
+
+Given an integer array nums that may contain duplicates, return all possible subsets (the power set).
+
+The solution set must not contain duplicate subsets. Return the solution in any order.
+
+algo: sort the array **** and once we include ele in pick case avoid duplicates in not pick case 
+
+class Solution {
+public:
+    void helper(vector<int>& nums,vector<int> op,vector<vector<int>>& res,int idx)
+    {
+        if(idx == nums.size())
+        {
+            res.push_back(op);
+            return;
+        }
+
+        //include case
+        op.push_back(nums[idx]);
+        helper(nums,op,res,idx+1);
+        op.pop_back();
+
+        //avoid duplicates in exclude case
+        while(idx+1<nums.size() && nums[idx] == nums[idx+1])
+        {
+            idx++;
+        }
+        helper(nums,op,res,idx+1);
+    }
+
+
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) 
+    {
+       vector<vector<int>> res;
+       vector<int> op;
+       
+       //sort imp
+       sort(nums.begin(),nums.end());   //imp sort 
+       helper(nums,op,res,0);
+       return res;
+    }   
+    
+};
