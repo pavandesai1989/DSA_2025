@@ -1,0 +1,49 @@
+https://leetcode.com/problems/combination-sum-ii/
+
+class Solution {
+public:
+    void solve(vector<int> &arr,int idx,vector<int> ds,int target,vector<vector<int>> &res)
+    {
+        //base case
+        if(arr.size() == idx)
+        {
+            if(target == 0)
+            {
+                res.push_back(ds);
+            }
+            return;
+        }
+
+        //pick case 
+        if(arr[idx]<=target)
+        {
+            ds.push_back(arr[idx]);
+            solve(arr,idx+1,ds,target-arr[idx],res);//ele can taken once call on next idx 
+            ds.pop_back();
+        }
+
+        //avoid duplicates. as we took ele in pick we dup avoid in exclude case
+        while(idx+1 < arr.size() && arr[idx] == arr[idx+1])
+        {
+            idx++;
+        }
+
+        //exclude case 
+        solve(arr,idx+1,ds,target,res);
+    }
+
+
+
+    vector<vector<int>> combinationSum2(vector<int>& arr, int target) 
+    {
+        vector<vector<int>> res;
+        vector<int> ds;
+
+        //sort the given array as we need to avoid duplicates
+        sort(arr.begin(),arr.end());
+
+        solve(arr,0,ds,target,res);
+
+        return res;
+    }
+};
