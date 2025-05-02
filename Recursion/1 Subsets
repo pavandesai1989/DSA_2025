@@ -1,0 +1,44 @@
+https://leetcode.com/problems/subsets/description/ 
+
+concept : pick and not pick
+
+class Solution {
+public:
+    void helper(vector<int> nums,vector<int> op,vector<vector<int>>& res,int idx)
+    {
+        //base case
+        if(idx == nums.size())
+        {
+            res.push_back(op);
+            return;
+        }
+
+        //exclude case
+        helper(nums,op,res,idx+1);
+
+        //include case
+        op.push_back(nums[idx]);
+        helper(nums,op,res,idx+1);
+    }
+
+    vector<vector<int>> subsets(vector<int>& nums) 
+    {
+        vector<vector<int>> res;
+        vector<int> op;
+        helper(nums,op,res,0);
+
+        return res;
+    }
+};
+
+Time Complexity: O(2^n * n)
+For an input of size n, the total number of subsets is 2^n.
+
+For each subset, copying the op vector into res takes up to O(n) time.
+
+So, total complexity is:O(2^n * n)
+
+Why 2^n?
+Each element has 2 choices: include or exclude → 2 × 2 × ... × 2 = 2^n subsets.
+
+Call Stack: Max depth of recursion is n, so O(n) auxiliary stack space.
