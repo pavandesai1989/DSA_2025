@@ -67,6 +67,33 @@ public:
 };
 
 *****optimal***
+Initialize two pointers fast and slow at head.
+
+Advance the fast pointer by n steps:
+
+This ensures that when fast reaches the end, slow is just before the node to delete.
+
+Edge Case:
+
+If fast == nullptr after moving n steps:
+
+This means the node to delete is the head node.
+
+So, move head to head->next and delete the old head.
+
+Traverse till fast->next becomes nullptr:
+
+Both fast and slow move one step at a time.
+
+When fast reaches the last node, slow is just before the node to delete.
+
+Delete the target node:
+
+slow->next is the node to delete.
+
+Update the link and deallocate memory.
+
+
 /*
 Definition of singly linked list:
 struct ListNode
