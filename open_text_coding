@@ -1,3 +1,37 @@
+print K non repeating characters in String
+Print max length of window with all unique characters
+https://www.geeksforgeeks.org/aptitude/puzzle-1-how-to-measure-45-minutes-using-two-identical-wires/
+reverse a number using recursion
+explain oops concepts with sample program
+you are given list of numbers from 1 to n. but two numbers are replaced with 0. find those two numbers
+
+
+Print all pairs with given sum (hashing based solution)
+Delete Kth node from end
+Longest substring with all unique characters (sliding window)
+Discussion on stack implementation using array and Linked list-> memoy optimisations using LL
+Interviewer didn't asked for code if approach explanation was good
+
+Q1: Reverse words in a sentence in one pass
+Q2: Delete node from a linked list, given only node address
+C++ concepts like Static and Dynamic polymorphism, Access specifiers, how static polymorphism works (name mangling), delete vs free etc.
+
+
+Q1: Merge content of two lists (union)
+
+
+Interviewer asked me about SOLID principles, Singleton Design Pattern, Lambda expression problem, Multithreading Concepts
+2)Permutations of String.
+
+
+Rotate a string for k rotations.
+
+multithreading concepts
+How STL works internally in C++
+
+
+
+
 https://leetcode.com/discuss/post/6529493/opentext-oa-by-anonymous_user-0x3g/
 
 Coding Assessment :
