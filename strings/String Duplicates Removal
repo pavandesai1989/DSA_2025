@@ -1,0 +1,23 @@
+https://www.geeksforgeeks.org/problems/remove-all-duplicates-from-a-given-string4321/1
+
+// User function template for C++
+class Solution {
+  public:
+    string removeDuplicates(string &s) 
+    {
+        string res;
+        unordered_set<char> unique;
+        
+        for(auto ele:s)
+        {
+            //check if present in set
+            if(unique.find(ele) == unique.end())
+            {
+                //add in set
+                unique.insert(ele);
+                res +=ele;
+            }
+        }
+        return res;
+    }
+};
