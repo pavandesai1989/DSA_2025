@@ -1,1 +1,40 @@
 https://www.geeksforgeeks.org/problems/count-distinct-elements-in-every-window/1 
+
+class Solution {
+  public:
+    vector<int> countDistinct(vector<int> &arr, int k) 
+    {
+        vector<int> res;
+        int n = arr.size();
+        int l=0;
+        int r=0;
+        
+        //use map
+        unordered_map<int,int> umap;
+        
+        while(r<n)
+        {
+            //add to map
+            umap[arr[r]]++;
+            
+            //check if len is equal to k
+            if(r-l+1 == k)
+            {
+                //add size of map to res
+                res.push_back(umap.size());
+                
+                //reduce count of l from map
+                umap[arr[l]]--;
+                
+                //if zero erase
+                if(umap[arr[l]] == 0)
+                {
+                    umap.erase(arr[l]);
+                }
+                l++;
+            }
+            r++;
+        }
+        return res;
+    }
+};
