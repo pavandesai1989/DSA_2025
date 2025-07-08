@@ -1,1 +1,44 @@
 https://www.geeksforgeeks.org/problems/first-negative-integer-in-every-window-of-size-k3345/1 
+
+class Solution {
+  public:
+    vector<int> firstNegInt(vector<int>& arr, int k) 
+    {
+        vector<int> res;
+        int l=0;
+        int r=0;
+        int n=arr.size();
+        deque<int> dq;
+        
+        while(r<n)
+        {
+            if(arr[r]<0)
+            {
+                dq.push_back(arr[r]);
+            }
+            
+            if(r-l+1 == k)
+            {
+                if(!dq.empty() && dq.front()<0) //-ve ele
+                {
+                    res.push_back(dq.front());
+                }
+                else
+                {
+                    res.push_back(0); //no -ve eles
+                }
+                
+                //clear -ve ele from prev wnd
+                if(arr[l]<0 && !dq.empty())
+                {
+                    dq.pop_front();
+                }
+                l++;
+            }
+            r++;
+        }
+        return res;
+    }
+};
+
+
