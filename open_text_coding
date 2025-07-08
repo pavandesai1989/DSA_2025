@@ -1,0 +1,123 @@
+https://leetcode.com/discuss/post/6529493/opentext-oa-by-anonymous_user-0x3g/
+
+Coding Assessment :
+
+Simple 2D array ‘BWBWBW..”
+DP problem on merge interval concept
+All test case got passed.
+
+Write a function that returns a chessboard pattern B for black and W for white. The function takes a number n as input and generates the corresponding board.
+
+Example Output for n = 2:
+BW
+WB
+
+Example Output for n = 4:
+BWBW
+WBWB
+BWBW
+WBWB
+
+#include <iostream>
+using namespace std;
+
+void generateChessboard(int n) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if ((i + j) % 2 == 0) {
+                cout << "B";
+            } else {
+                cout << "W";
+            }
+        }
+        cout << endl;
+    }
+}
+
+int main() {
+    int n = 2;
+    generateChessboard(n);
+    return 0;
+}
+
+
+Whenever an antivirus software program detects a virus in a multiprocessor system, it starts and processes to repel and destroy the effect of a virus. 
+Each process is associated with four characteristics. Process ID, Start Time, End Time, Effectiveness. The Start Time refers to the time at which the software program was initiated. 
+End Time refers to the time at which the process ended. Effectiveness refers to the rate at which it minimizes the effect of the virus. Effectiveness of the 
+antivirus system is calculated as the sum of the effectiveness of all the N processes initiated by the antivirus system. In a single core processing environment, the antivirus program may become
+irrelevant because many of the processes initiated by the antivirus program overlap, possibly preventing some of them from executing in the system. Write an algorithm to find the maximum possible 
+effectiveness of the antivirus system in a single core processing system.
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+struct Process {
+    int id;
+    int startTime;
+    int endTime;
+    int effectiveness;
+
+    Process(int id, int startTime, int endTime, int effectiveness)
+        : id(id), startTime(startTime), endTime(endTime), effectiveness(effectiveness) {}
+};
+
+// Binary search to find the last non-overlapping process
+int binarySearch(const vector<Process>& processes, int index) {
+    int low = 0, high = index - 1;
+
+    while (low <= high) {
+        int mid = (low + high) / 2;
+        if (processes[mid].endTime <= processes[index].startTime) {
+            if (mid + 1 <= high && processes[mid + 1].endTime <= processes[index].startTime)
+                low = mid + 1;
+            else
+                return mid;
+        } else {
+            high = mid - 1;
+        }
+    }
+    return -1;
+}
+
+// DP to find max effectiveness
+int getMaxEffectiveness(vector<Process>& processes) {
+    // Sort by endTime
+    sort(processes.begin(), processes.end(), [](const Process& a, const Process& b) {
+        return a.endTime < b.endTime;
+    });
+
+    int n = processes.size();
+    vector<int> dp(n, 0);
+    dp[0] = processes[0].effectiveness;
+
+    for (int i = 1; i < n; ++i) {
+        int includeEffectiveness = processes[i].effectiveness;
+        int lastNonOverlapping = binarySearch(processes, i);
+
+        if (lastNonOverlapping != -1)
+            includeEffectiveness += dp[lastNonOverlapping];
+
+        dp[i] = max(dp[i - 1], includeEffectiveness);
+    }
+
+    return dp[n - 1];
+}
+
+int main() {
+    int n;
+    cin >> n;
+
+    vector<Process> processes;
+    for (int i = 0; i < n; ++i) {
+        int id, startTime, endTime, effectiveness;
+        cin >> id >> startTime >> endTime >> effectiveness;
+        processes.emplace_back(id, startTime, endTime, effectiveness);
+    }
+
+    cout << getMaxEffectiveness(processes) << endl;
+
+    return 0;
+}
+
