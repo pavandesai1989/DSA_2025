@@ -9,7 +9,7 @@ public:
             return false;
         }
 
-        for(int cnt=1;cnt<s.length();++cnt)
+        for(int cnt=1;cnt<=s.length();++cnt)
         {
             rotate(s.begin(),s.begin()+1,s.end());
 
