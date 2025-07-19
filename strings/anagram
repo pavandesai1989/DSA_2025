@@ -1,0 +1,28 @@
+https://leetcode.com/problems/valid-anagram/
+
+
+class Solution {
+public:
+    bool isAnagram(string s, string t) 
+    {
+        unordered_map<char,int> smap;
+        for(auto ele:s)
+        {
+            smap[ele]++;
+        }
+
+        for(auto& chr:t)
+        {
+            smap[chr]--;
+        }
+
+        for(auto ele:smap)
+        {
+            if(ele.second !=0)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+};
